@@ -15,11 +15,8 @@ import sys
 import tempfile
 from pathlib import Path
 
-from dotenv import load_dotenv
-
-load_dotenv()  # load .env file if present
-
 import psycopg
+from dotenv import load_dotenv
 
 from .pipeline import ReconciliationError, extract, init_db, run
 
@@ -68,8 +65,12 @@ def cmd_runs(_: argparse.Namespace) -> int:
 
 
 def main(argv: list[str] | None = None) -> int:
-    p = argparse.ArgumentParser(prog="ecom-pipeline", description=__doc__,
-                                formatter_class=argparse.RawDescriptionHelpFormatter)
+    load_dotenv()  # values already in the environment take precedence
+    p = argparse.ArgumentParser(
+        prog="ecom-pipeline",
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
     sub = p.add_subparsers(dest="command", required=True)
     r = sub.add_parser("run", help="extract (optional), load, transform, reconcile")
     r.add_argument("--source", type=Path, help="existing shopflow-datagen output folder")
