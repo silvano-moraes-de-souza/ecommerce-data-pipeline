@@ -7,6 +7,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 COPY --from=ghcr.io/astral-sh/uv:0.12 /uv /usr/local/bin/uv
 
+# git is needed to install shopflow-datagen from its repository.
+RUN apt-get update && apt-get install -y --no-install-recommends git \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 # Dependencies first so code changes don't invalidate the layer.
@@ -21,4 +25,5 @@ USER app
 
 ENV PATH="/app/.venv/bin:$PATH"
 
-CMD ["python", "-c", "import ecommerce_data_pipeline; print(ecommerce_data_pipeline.__version__)"]
+ENTRYPOINT ["ecom-pipeline"]
+CMD ["run", "--scale", "1"]
