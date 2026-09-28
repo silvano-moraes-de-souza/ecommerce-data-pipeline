@@ -325,7 +325,7 @@ dependencies = [
 [package.dev-dependencies]
 dev = [
     { name = "matplotlib" },
-    { name = "pgserver" },
+    { name = "pgserver", marker = "python_full_version < '3.13'" },
     { name = "psutil" },
     { name = "pytest" },
     { name = "pytest-cov" },
@@ -343,7 +343,7 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "matplotlib", specifier = ">=3.9" },
-    { name = "pgserver", specifier = ">=0.1" },
+    { name = "pgserver", marker = "python_full_version < '3.13'", specifier = ">=0.1" },
     { name = "psutil", specifier = ">=6.0" },
     { name = "pytest", specifier = ">=8.3" },
     { name = "pytest-cov", specifier = ">=5.0" },

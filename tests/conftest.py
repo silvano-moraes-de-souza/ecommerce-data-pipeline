@@ -23,8 +23,10 @@ def db_url():
     if url:
         yield url
         return
-    import pgserver  # noqa: PLC0415 - only needed without a provided database
-
+    try:
+        import pgserver  # noqa: PLC0415 - only needed without a provided database
+    except ImportError:
+        pytest.skip("no embedded PostgreSQL for this Python version; set TEST_DATABASE_URL")
     server = pgserver.get_server(tempfile.mkdtemp(prefix="ecom-pg-"), cleanup_mode="stop")
     yield server.get_uri()
 

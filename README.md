@@ -62,7 +62,7 @@ uv run ecom-pipeline run --scale 1 --method insert
 uv run ecom-pipeline runs                         # last 20 runs
 ```
 
-Tests need no setup: without `TEST_DATABASE_URL` they start an embedded PostgreSQL 16 ([pgserver](https://github.com/orm011/pgserver)).
+Tests need no setup on Python 3.11 and 3.12: without `TEST_DATABASE_URL` they start an embedded PostgreSQL 16 ([pgserver](https://github.com/orm011/pgserver)). On 3.13, which pgserver does not support yet, point `TEST_DATABASE_URL` at any PostgreSQL.
 
 ```bash
 uv run pytest

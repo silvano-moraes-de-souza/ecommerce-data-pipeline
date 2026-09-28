@@ -20,7 +20,7 @@ dev = [
     "ruff>=0.6",
     "psutil>=6.0",
     "matplotlib>=3.9",
-    "pgserver>=0.1",
+    "pgserver>=0.1; python_version < '3.13'",  # no wheels for 3.13 yet
 ]
 
 [build-system]
