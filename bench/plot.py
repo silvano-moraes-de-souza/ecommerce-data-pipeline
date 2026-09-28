@@ -70,10 +70,12 @@ def plot(path: Path, metric: str, out: Path | None = None, title: str | None = N
             zorder=3,
         )
 
-    span = max(values) if values else 1
-    for yi, v in zip(y, values, strict=True):
+    # Labels sit past the whisker so they never overlap the min/max range.
+    ends = [c["max_s"] for c in cases] if metric == "median_s" else values
+    span = max(ends) if ends else 1
+    for yi, v, end in zip(y, values, ends, strict=True):
         ax.text(
-            v + span * 0.02, yi, f"{_fmt(v)} {unit}".strip(), va="center", color=INK, fontsize=9
+            end + span * 0.02, yi, f"{_fmt(v)} {unit}".strip(), va="center", color=INK, fontsize=9
         )
 
     ax.set_yticks(y, labels, color=INK, fontsize=9)

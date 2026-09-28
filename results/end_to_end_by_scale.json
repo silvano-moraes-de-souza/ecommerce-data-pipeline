@@ -1,0 +1,101 @@
+{
+  "name": "end_to_end_by_scale",
+  "created_at": "2026-09-28T19:58:37+00:00",
+  "git_sha": "08c3c31",
+  "machine": {
+    "os": "Windows 11",
+    "python": "3.12.14",
+    "cpu": "Intel64 Family 6 Model 141 Stepping 1, GenuineIntel",
+    "cores_physical": 6,
+    "cores_logical": 12,
+    "cpu_max_mhz": 2688,
+    "ram_gb": 23.8
+  },
+  "notes": "load (COPY) + transform + reconcile. Database: embedded PostgreSQL 16 (pgserver), same machine.",
+  "cases": [
+    {
+      "label": "scale 0.1",
+      "params": {
+        "scale": 0.1
+      },
+      "runs": 3,
+      "wall_s": [
+        2.111710499972105,
+        2.68689540005289,
+        2.5463722001295537
+      ],
+      "peak_rss_mb": [
+        218.48828125,
+        218.98828125,
+        219.44140625
+      ],
+      "extra": {
+        "rows": 40867,
+        "load_s": 1.0726127999369055,
+        "transform_s": 1.395195199875161,
+        "reconcile_s": 0.05221490003168583
+      },
+      "median_s": 2.5463722001295537,
+      "min_s": 2.111710499972105,
+      "max_s": 2.68689540005289,
+      "stdev_s": 0.29986531214902706,
+      "median_peak_rss_mb": 218.98828125
+    },
+    {
+      "label": "scale 1",
+      "params": {
+        "scale": 1
+      },
+      "runs": 3,
+      "wall_s": [
+        25.240596200106665,
+        24.61789259989746,
+        27.30208780011162
+      ],
+      "peak_rss_mb": [
+        244.4921875,
+        244.54296875,
+        245.32421875
+      ],
+      "extra": {
+        "rows": 394351,
+        "load_s": 10.139631500001997,
+        "transform_s": 16.696465799817815,
+        "reconcile_s": 0.38285380019806325
+      },
+      "median_s": 25.240596200106665,
+      "min_s": 24.61789259989746,
+      "max_s": 27.30208780011162,
+      "stdev_s": 1.4048968683060719,
+      "median_peak_rss_mb": 244.54296875
+    },
+    {
+      "label": "scale 10",
+      "params": {
+        "scale": 10
+      },
+      "runs": 3,
+      "wall_s": [
+        240.85387639980763,
+        248.43395449989475,
+        276.54864930012263
+      ],
+      "peak_rss_mb": [
+        316.43359375,
+        354.07421875,
+        364.1875
+      ],
+      "extra": {
+        "rows": 3915163,
+        "load_s": 89.52273099985905,
+        "transform_s": 183.48329750006087,
+        "reconcile_s": 3.4413368001114577
+      },
+      "median_s": 248.43395449989475,
+      "min_s": 240.85387639980763,
+      "max_s": 276.54864930012263,
+      "stdev_s": 18.806073753437758,
+      "median_peak_rss_mb": 354.07421875
+    }
+  ]
+}
