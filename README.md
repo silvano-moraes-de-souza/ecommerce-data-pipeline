@@ -41,6 +41,14 @@ uv sync
 uv run pytest
 ```
 
+### CLI
+
+```bash
+ecom-pipeline run --scale 1          # gera, carrega, transforma e reconcilia
+ecom-pipeline run --scale 1 --method insert  # usa INSERT ao invés de COPY
+ecom-pipeline runs                   # lista os últimos runs gravados no banco
+```
+
 With Docker:
 
 ```bash
