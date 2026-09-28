@@ -1,0 +1,125 @@
+{
+  "name": "load_copy_vs_insert",
+  "created_at": "2026-09-28T19:39:58+00:00",
+  "git_sha": "a6b5195",
+  "machine": {
+    "os": "Windows 11",
+    "python": "3.12.14",
+    "cpu": "Intel64 Family 6 Model 141 Stepping 1, GenuineIntel",
+    "cores_physical": 6,
+    "cores_logical": 12,
+    "cpu_max_mhz": 2688,
+    "ram_gb": 23.8
+  },
+  "notes": "Raw layer load only (5 tables). Database: embedded PostgreSQL 16 (pgserver), same machine.",
+  "cases": [
+    {
+      "label": "copy \u00b7 scale 0.1",
+      "params": {
+        "scale": 0.1,
+        "method": "copy"
+      },
+      "runs": 3,
+      "wall_s": [
+        0.6923100999556482,
+        0.8123713000677526,
+        0.728037599939853
+      ],
+      "peak_rss_mb": [
+        148.3125,
+        149.31640625,
+        150.51171875
+      ],
+      "extra": {
+        "rows": 40867,
+        "rows_per_s": 56133.089834063845
+      },
+      "median_s": 0.728037599939853,
+      "min_s": 0.6923100999556482,
+      "max_s": 0.8123713000677526,
+      "stdev_s": 0.061648626646966805,
+      "median_peak_rss_mb": 149.31640625
+    },
+    {
+      "label": "insert \u00b7 scale 0.1",
+      "params": {
+        "scale": 0.1,
+        "method": "insert"
+      },
+      "runs": 3,
+      "wall_s": [
+        2.528177300002426,
+        2.4461873001419008,
+        2.0352207999676466
+      ],
+      "peak_rss_mb": [
+        158.15625,
+        158.83984375,
+        159.71875
+      ],
+      "extra": {
+        "rows": 40867,
+        "rows_per_s": 16706.40674065692
+      },
+      "median_s": 2.4461873001419008,
+      "min_s": 2.0352207999676466,
+      "max_s": 2.528177300002426,
+      "stdev_s": 0.26414072488894486,
+      "median_peak_rss_mb": 158.83984375
+    },
+    {
+      "label": "copy \u00b7 scale 1",
+      "params": {
+        "scale": 1,
+        "method": "copy"
+      },
+      "runs": 3,
+      "wall_s": [
+        8.626239100005478,
+        8.406793399946764,
+        9.610796299995854
+      ],
+      "peak_rss_mb": [
+        207.16796875,
+        210.0,
+        210.6875
+      ],
+      "extra": {
+        "rows": 394351,
+        "rows_per_s": 45715.28744198032
+      },
+      "median_s": 8.626239100005478,
+      "min_s": 8.406793399946764,
+      "max_s": 9.610796299995854,
+      "stdev_s": 0.6412399809033756,
+      "median_peak_rss_mb": 210.0
+    },
+    {
+      "label": "insert \u00b7 scale 1",
+      "params": {
+        "scale": 1,
+        "method": "insert"
+      },
+      "runs": 3,
+      "wall_s": [
+        26.0947720000986,
+        23.279697799822316,
+        17.495193500071764
+      ],
+      "peak_rss_mb": [
+        256.25,
+        257.33203125,
+        258.71484375
+      ],
+      "extra": {
+        "rows": 394351,
+        "rows_per_s": 16939.695841026336
+      },
+      "median_s": 23.279697799822316,
+      "min_s": 17.495193500071764,
+      "max_s": 26.0947720000986,
+      "stdev_s": 4.384401957033168,
+      "median_peak_rss_mb": 257.33203125
+    }
+  ]
+}
