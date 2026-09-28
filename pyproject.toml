@@ -6,7 +6,11 @@ readme = "README.md"
 license = { text = "MIT" }
 authors = [{ name = "Silvano Moraes de Souza" }]
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "psycopg[binary]>=3.2",
+    "pyarrow>=16",
+    "shopflow-datagen",
+]
 
 [dependency-groups]
 dev = [
@@ -15,6 +19,7 @@ dev = [
     "ruff>=0.6",
     "psutil>=6.0",
     "matplotlib>=3.9",
+    "pgserver>=0.1",
 ]
 
 [build-system]
@@ -36,3 +41,9 @@ ignore = ["PLR0913", "PLR2004"]
 testpaths = ["tests"]
 pythonpath = ["."]
 addopts = "-q --cov=ecommerce_data_pipeline --cov-report=term-missing"
+
+[tool.uv.sources]
+shopflow-datagen = { git = "https://github.com/silvano-moraes-de-souza/shopflow-datagen" }
+
+[project.scripts]
+ecom-pipeline = "ecommerce_data_pipeline.cli:main"
