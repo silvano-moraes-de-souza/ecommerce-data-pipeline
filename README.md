@@ -12,6 +12,19 @@
 
 > Raw e-commerce files in, a PostgreSQL star schema out. Every batch loads in one transaction, reruns change nothing, and the run is only marked successful when row counts and money totals match between source and mart.
 
+<table>
+<tr>
+<td align="center"><b>2.7x</b><br/>faster raw load with COPY<br/>than batched INSERT</td>
+<td align="center"><b>3.9M rows</b><br/>end to end in 248 s<br/>(scale 10, median of 3)</td>
+<td align="center"><b>6 checks</b><br/>reconcile counts and cents<br/>between raw and mart</td>
+<td align="center"><b>13 tests</b><br/>95% coverage, against<br/>real PostgreSQL 16</td>
+</tr>
+</table>
+
+<sub>All numbers come from <a href="bench/run.py">bench/run.py</a> and <a href="results/">results/</a>. Details in <a href="#results">Results</a>.</sub>
+
+**Contents:** [Problem](#problem) · [Solution](#solution) · [Quickstart](#quickstart) · [Results](#results) · [How it works](#how-it-works) · [Engineering decisions](#engineering-decisions) · [Tests](#tests) · [Limitations](#limitations)
+
 ## Problem
 
 An analytics team needs order, customer, product and payment data in a shape it can query: a star schema with clean dimensions and facts at a known grain. The load has to be safe to rerun after a failure, it has to reject files whose structure changed upstream, and someone has to be able to prove that no order and no cent was lost on the way.
