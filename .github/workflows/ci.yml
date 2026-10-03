@@ -30,8 +30,8 @@ jobs:
     env:
       TEST_DATABASE_URL: postgresql://ci:ci@localhost:5432/ecom_test
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v6
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
         with:
           python-version: ${{ matrix.python }}
           enable-cache: true
@@ -43,7 +43,7 @@ jobs:
   compose-e2e:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: cp .env.example .env
       - run: docker compose build
       - run: docker compose up -d db
